@@ -122,9 +122,9 @@ def classify(string, terms, matrix):
 def calculate_term_doc_vector(terms, string):
     """Calculates the term document vector for a given string and terms."""
     results = []
+    input_lower = string.lower()
 
     for term in terms:
-        input_lower = string.lower()
         keyword_count = input_lower.count(term.lower())
         results.append(keyword_count)
 
@@ -180,10 +180,12 @@ def classifying_rounds(terms, matrix, files):
         for i in range(20, 401, 20):
             correct_count = 0
             substrings = calculate_substrings(i, file)
+
             for substring in substrings:
                 file_index = classify(substring, terms, matrix)
                 if file_index == file_indicator:
                     correct_count += 1
+
             results.append(correct_count / len(substrings))
         file_indicator += 1
         full_results.append(results)
