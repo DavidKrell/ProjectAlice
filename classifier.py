@@ -2,11 +2,21 @@ import numpy as np
 import random
 
 
+def main():
+    string = "Humpty Dumpty walks down the street."
+    terms = ['mock', 'turtle', 'march', 'rabbit', 'hatter', 'dormouse', 'gryphon', 'mouse', 'hare', 'duchess', 'humpty',
+             'knight', 'dumpty', 'looking-glass', 'tweedledum', 'unicorn', 'lion', 'gnat', 'sheep', 'kitten']
+
+    print(calculate_term_doc_vector(string, terms))
+
+
 def classify(string, terms, matrix):
     """Classifies a string either as Wonderland-string or Looking-Glass-string."""
     count_terms = matrix.shape[0]  # Anzahl Zeilen
 
+    # calculate term-doc-vector of string
     term_doc_vector = calculate_term_doc_vector(terms, string)
+    print(term_doc_vector)
 
     doc_alice = [matrix[i][0] for i in range(count_terms)]
     doc_looking_glass = [matrix[j][1] for j in range(count_terms)]
@@ -28,7 +38,7 @@ def classify(string, terms, matrix):
 
 def calculate_term_doc_vector(string_arr, terms):
     """Calculates the term document vector for a given string."""
-    string_arr = string_arr.split()
+    string_arr = string_arr.lower().split()
     anzahl_terms = len(terms)
     term_doc_vector = [0] * anzahl_terms
 
@@ -51,3 +61,7 @@ def cos_of_angle(vector1, string_vec):
         return res
     else:
         return 0
+
+
+if __name__ == '__main__':
+    main()
